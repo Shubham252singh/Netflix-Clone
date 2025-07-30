@@ -3,12 +3,11 @@ import Header from "./Header"
 import {useState,useRef} from "react"
 import {auth} from "../utils/firebase"
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword ,updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/UserSlice";
+import { SIGNIN_BG_URL } from "../utils/constant";
 
 function Signin() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const name =useRef(null);
   const email =useRef(null);
@@ -27,11 +26,10 @@ function Signin() {
       .then((userCredential) => {
         const user = userCredential.user;
         updateProfile(auth.currentUser, {
-          displayName: name.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+          displayName: name.current.value
         }).then(() => {
           const {uid,email,displayName} = auth.currentUser;
           dispatch(addUser({uid:uid,email:email,displayName:displayName}));
-          navigate("/browse");
         }).catch((error) => {
           setErrMssg(error.message +". With the error code "+error.code);
         });
@@ -49,7 +47,6 @@ function Signin() {
         const user = userCredential.user;
         const {uid,email,displayName,} = user;
         dispatch(addUser({uid:uid,email:email,displayName:displayName}));
-        navigate("/browse");
         // ...
       })
       .catch((error) => {
@@ -62,8 +59,8 @@ function Signin() {
   return (
     <div>
       <Header />
-      <div className="absolute overflow-hidden h-full">
-        <img src="https://assets.nflxext.com/ffe/siteui/vlv3/a927b1ee-784d-494a-aa80-cf7a062d2523/web/IN-en-20250714-TRIFECTA-perspective_5acb7337-c372-45ec-ae12-ddb110e6ad78_large.jpg" className="w-full h-full object-cover scale-110" alt="bg-wallpaper"></img>
+      <div className="absolute overflow-hidden w-full h-full">
+        <img src={SIGNIN_BG_URL} className="w-full h-full object-cover scale-110" alt="bg-wallpaper"></img>
         <div className="absolute inset-0 bg-gradient-to-b from-black opacity-60"></div>
       </div>
       <form className="absolute top-44 w-3/12 mx-auto right-0 left-0 bg-black bg-opacity-60 rounded-lg py-10 px-10 text-white " onSubmit={(e)=>{e.preventDefault();}}>
