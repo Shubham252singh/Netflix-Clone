@@ -1,0 +1,16 @@
+import React from 'react'
+import MovieCard from './MovieCard'
+
+export  const MovieList = ({title,movies}) => {
+    console.log("Sample of Now Playing",movies);
+  return (
+    <div className ="px-6">
+            <h1 className ="text-3xl py-2 text-white">{title}</h1>
+                 {
+                movies &&  <div className ="flex overflow-x-scroll gap-3 scrollbar-hide">
+                {movies.map((movie)=>(<MovieCard key = {movie.id} posterPath ={movie.poster_path}/>))}   
+                </div>
+            }
+    </div>
+  )
+}
