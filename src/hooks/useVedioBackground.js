@@ -5,6 +5,7 @@ import { addBackgroundMoviekey } from '../utils/movieSlice';
 
 const useVedioBackground = (movieId) => {
     const dispatch = useDispatch();
+    const movieKey = useSelector(store => store.movie?.movieKey);
     const movieVedio = async () => {
         const data = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`, API_OPTIONS);       
         const json = await data.json();
@@ -13,7 +14,7 @@ const useVedioBackground = (movieId) => {
         dispatch(addBackgroundMoviekey(trailer.key));
     }
     useEffect(() => {
-        movieVedio();
+        if(!movieKey) movieVedio();
     }, [])
 }
 

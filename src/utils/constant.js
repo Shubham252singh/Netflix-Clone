@@ -5,7 +5,8 @@ export const API_OPTIONS ={
      method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTA4Nzc2OWU5NDQ2ODYwZjdlMWFlYjU3MWJkYWVhOCIsIm5iZiI6MTc1MzQ1NjY4Ny4xMjIsInN1YiI6IjY4ODNhMDJmZWYzYzQ3YWI4YjU1ZTgzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NeoGRiucHIQpLV6SniyyZXHKssS5wrAaEvgZTRYlsUY'
+    Authorization: 'Bearer '+ process.env.REACT_APP_TMDBAPI_KEY
   },
 };
 export const Poster_Img_URL="https://image.tmdb.org/t/p/w500";
+export const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
